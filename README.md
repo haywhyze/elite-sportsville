@@ -52,8 +52,10 @@ yarn dev # or npm run dev
 ```
 Open http://localhost:3000 to see your application running.
 
+<!--
 ### Contribution
 Your contributions are welcome! Please refer to [CONTRIBUTING.md](https://github.com/haywhyze/elite-sportsville/CONTRIBUTING.md) for contribution guidelines.
+-->
 
 ### Deployment
 Detailed steps for deploying this application to production will be added, including setup for continuous deployment via Vercel for a streamlined workflow.
