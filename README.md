@@ -63,4 +63,4 @@ Detailed steps for deploying this application to production will be added, inclu
 - Special thanks to Firebase and Ant Design for powering parts of our platform.
 
 ### License
-Elite Sportsville is under the MIT License. See the [LICENSE.md](https://github.com/haywhyze/elite-sportsville/LICENSE.md) file for more details.
+Elite Sportsville is under the MIT License. See the [LICENSE](https://github.com/haywhyze/elite-sportsville/LICENSE) file for more details.
