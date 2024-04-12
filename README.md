@@ -52,6 +52,8 @@ yarn dev # or npm run dev
 ```
 Open http://localhost:3000 to see your application running.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
 <!--
 ### Contribution
 Your contributions are welcome! Please refer to [CONTRIBUTING.md](https://github.com/haywhyze/elite-sportsville/CONTRIBUTING.md) for contribution guidelines.
