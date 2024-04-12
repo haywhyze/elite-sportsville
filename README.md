@@ -36,21 +36,27 @@ This section guides you through setting up the project locally.
 ### Setup
 
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/haywhyze/elite-sportsville.git
 ```
+
 2. Navigate to the project directory and install dependencies:
+
 ```bash
 cd elite-sportsville-web
 yarn # or npm install
 ```
+
 3. Set up your local environment variables for Firebase (you'll find the necessary keys in your Firebase project settings).
 
 4. Run the development server:
+
 ```bash
 yarn dev # or npm run dev
 ```
-Open http://localhost:3000 to see your application running.
+
+Open <http://localhost:3000> to see your application running.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
@@ -60,11 +66,14 @@ Your contributions are welcome! Please refer to [CONTRIBUTING.md](https://github
 -->
 
 ### Deployment
+
 Detailed steps for deploying this application to production will be added, including setup for continuous deployment via Vercel for a streamlined workflow.
 
 ### Acknowledgments
+
 - To all contributors and the community around Elite Sportsville.
 - Special thanks to Firebase and Ant Design for powering parts of our platform.
 
 ### License
+
 Elite Sportsville is under the MIT License. See the [LICENSE](https://github.com/haywhyze/elite-sportsville/LICENSE) file for more details.
