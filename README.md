@@ -1,31 +1,40 @@
-# Elite Sportsville Web Platform
+---
+name: Vercel Postgres + Drizzle Next.js Starter
+slug: postgres-drizzle
+description: Simple Next.js template that uses Vercel Postgres as the database and Drizzle as the ORM.
+framework: Next.js
+useCase: Starter
+css: Tailwind
+database: Vercel Postgres
+deployUrl: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fstorage%2Fpostgres-drizzle&project-name=postgres-drizzle&repository-name=postgres-drizzle&demo-title=Vercel%20Postgres%20%2B%20Drizzle%20Next.js%20Starter&demo-description=Simple%20Next.js%20template%20that%20uses%20Vercel%20Postgres%20as%20the%20database%20and%20Drizzle%20as%20the%20ORM.&demo-url=https%3A%2F%2Fpostgres-drizzle.vercel.app%2F&demo-image=https%3A%2F%2Fpostgres-drizzle.vercel.app%2Fopengraph-image.png&stores=%5B%7B"type"%3A"postgres"%7D%5D
+demoUrl: https://postgres-drizzle.vercel.app/
+relatedTemplates:
+  - postgres-starter
+  - postgres-prisma
+  - postgres-kysely
+---
 
-Welcome to the Elite Sportsville repository, the starting point of an ambitious project aimed at revolutionizing local sports and entertainment. Beginning with a state-of-the-art five-a-side football pitch, this Next.js-based web application is designed to provide an intuitive and seamless online booking and information portal. Leveraging Firebase for robust backend services and Ant Design for a polished UI, we're setting the stage for a dynamic and scalable platform.
+# Vercel Postgres + Drizzle Next.js Starter
 
-## Project Overview
+Simple Next.js template that uses [Vercel Postgres](https://vercel.com/postgres) as the database and [Drizzle](https://github.com/drizzle-team/drizzle-orm) as the ORM.
 
-Elite Sportsville is not just about sports; it's about building a community hub that adapts and grows with its members' needs. Initially focusing on our premier football pitch, plans for future expansions are in the pipeline, ready to enrich our offerings and cater to a wider audience.
+## Demo
 
-## Technology Stack
+https://postgres-drizzle.vercel.app/
 
-- **Frontend:** Next.js with React for a reactive and server-side rendered experience.
-- **UI Framework:** Ant Design for efficient, attractive, and consistent UI components.
-- **Backend Services:** Firebase for authentication, database, storage, and potentially other backend needs.
-- **Deployment:** Vercel, chosen for its excellent support for Next.js applications.
+## How to Use
 
-## Key Features
+You can choose from one of the following two methods to use this repository:
 
-- Smooth and secure user authentication via Firebase.
-- Online booking for the five-a-side football pitch.
-- Informative sections about Elite Sportsville's mission and current offerings.
+### One-Click Deploy
 
-## Future Directions
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
 
-While focused on our current offerings, Elite Sportsville is envisioned to expand, embracing more sports and entertainment facilities. The specifics of these additions are under exploration and will be unveiled as plans solidify.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fstorage%2Fpostgres-drizzle&project-name=postgres-drizzle&repository-name=postgres-drizzle&demo-title=Vercel%20Postgres%20%2B%20Drizzle%20Next.js%20Starter&demo-description=Simple%20Next.js%20template%20that%20uses%20Vercel%20Postgres%20as%20the%20database%20and%20Drizzle%20as%20the%20ORM.&demo-url=https%3A%2F%2Fpostgres-drizzle.vercel.app%2F&demo-image=https%3A%2F%2Fpostgres-drizzle.vercel.app%2Fopengraph-image.png&stores=%5B%7B"type"%3A"postgres"%7D%5D)
 
-## Getting Started
+### Clone and Deploy
 
-This section guides you through setting up the project locally.
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
 
 ### Prerequisites
 
@@ -38,14 +47,13 @@ This section guides you through setting up the project locally.
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/haywhyze/elite-sportsville.git
+pnpm create next-app --example https://github.com/vercel/examples/tree/main/storage/postgres-drizzle
 ```
 
 2. Navigate to the project directory and install dependencies:
 
 ```bash
-cd elite-sportsville-web
-yarn # or npm install
+pnpm dev
 ```
 
 3. Set up your local environment variables for Firebase (you'll find the necessary keys in your Firebase project settings).
