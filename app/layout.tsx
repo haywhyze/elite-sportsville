@@ -14,18 +14,18 @@ export const metadata = {
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   display: 'swap',
-  weight: ['400', '600', '700'],
+  weight: ['200', '400', '600'],
   subsets: ['latin'],
 });
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={montserrat.variable}>{children}</body>
+    <html lang='en' className='scroll-smooth'>
+      <body className={montserrat.className}>{children}</body>
     </html>
-  )
+  );
 }

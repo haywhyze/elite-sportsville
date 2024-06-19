@@ -42,7 +42,7 @@ export default function Hero() {
                 Book Now
               </a>
               <a
-                href='#'
+                href='#features'
                 className='text-sm font-semibold leading-6 text-white'
               >
                 Learn more <span aria-hidden='true'>→</span>
