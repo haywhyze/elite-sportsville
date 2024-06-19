@@ -52,7 +52,7 @@ export default function Pricing() {
     <div className='isolate overflow-hidden bg-gray-900'>
       <div className='mx-auto max-w-7xl px-6 pb-96 pt-24 text-center sm:pt-32 lg:px-8'>
         <div className='mx-auto max-w-4xl'>
-          <h2 className='text-base font-semibold leading-7 text-indigo-400'>
+          <h2 className='text-base font-semibold leading-7 text-bright-yellow'>
             Pricing
           </h2>
           <p className='mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl'>
@@ -61,7 +61,7 @@ export default function Pricing() {
           </p>
         </div>
         <div className='relative mt-6'>
-          <p className='mx-auto max-w-2xl text-lg leading-8 text-white/60'>
+          <p className='mx-auto max-w-2xl text-lg leading-8 text-white/80'>
             Whether you play during the day, night, or off-peak hours, we have a
             pricing plan that fits your lifestyle and budget.
           </p>
@@ -78,14 +78,14 @@ export default function Pricing() {
             />
             <defs>
               <radialGradient id='6d1bd035-0dd1-437e-93fa-59d316231eb0'>
-                <stop stopColor='#7775D6' />
-                <stop offset={1} stopColor='#E935C1' />
+                <stop stopColor='#e5b401' />
+                <stop offset={1} stopColor='#770097' />
               </radialGradient>
             </defs>
           </svg>
         </div>
       </div>
-      <div className='flow-root bg-white pb-24 sm:pb-32'>
+      <div className='flow-root pb-24 sm:pb-32'>
         <div className='-mt-80'>
           <div className='mx-auto max-w-7xl px-6 lg:px-8'>
             <div className='mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2'>
@@ -97,7 +97,7 @@ export default function Pricing() {
                   <div>
                     <h3
                       id={tier.id}
-                      className='text-base font-semibold leading-7 text-indigo-600'
+                      className='text-base font-semibold leading-7 text-bright-purple-dark'
                     >
                       {tier.name}
                     </h3>
@@ -105,21 +105,21 @@ export default function Pricing() {
                       <span className='text-5xl font-bold tracking-tight text-gray-900'>
                         {tier.priceHourly}
                       </span>
-                      <span className='text-base font-semibold leading-7 text-gray-600'>
+                      <span className='text-base font-semibold leading-7 text-gray-800'>
                         /hour
                       </span>
                     </div>
-                    <p className='mt-6 text-base leading-7 text-gray-600'>
+                    <p className='mt-6 text-base leading-7 text-gray-800'>
                       {tier.description}
                     </p>
                     <ul
                       role='list'
-                      className='mt-10 space-y-4 text-sm leading-6 text-gray-600'
+                      className='mt-10 space-y-4 text-sm leading-6 text-gray-800'
                     >
                       {tier.features.map((feature) => (
                         <li key={feature} className='flex gap-x-3'>
                           <CheckIcon
-                            className='h-6 w-5 flex-none text-indigo-600'
+                            className='h-6 w-5 flex-none text-bright-purple-dark'
                             aria-hidden='true'
                           />
                           {feature}
@@ -130,25 +130,25 @@ export default function Pricing() {
                   <a
                     href={tier.href}
                     aria-describedby={tier.id}
-                    className='mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                    className='mt-8 block rounded-md bg-bright-purple-dark px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-bright-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple-dark'
                   >
                     Get started today
                   </a>
                 </div>
               ))}
-              <div className='flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center'>
+              <div className='bg-white flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center'>
                 <div className='lg:min-w-0 lg:flex-1'>
-                  <h3 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
+                  <h3 className='text-lg font-semibold leading-8 tracking-tight text-bright-purple-dark'>
                     Discounted
                   </h3>
-                  <p className='mt-1 text-base leading-7 text-gray-600'>
+                  <p className='mt-1 text-base leading-7 text-gray-800'>
                     Enjoy flexibility with our discounted rates for other
                     booking times. Perfect for those who prefer non-peak hours.
                   </p>
                 </div>
                 <a
                   href='#'
-                  className='rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                  className='rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-bright-purple-dark ring-1 ring-inset ring-bright-purple-dark hover:ring-bright-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple-dark'
                 >
                   Book Discounted Time Slot
                   <span aria-hidden='true'>&rarr;</span>

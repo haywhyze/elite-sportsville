@@ -86,13 +86,13 @@ function classNames(...classes: string[]) {
 
 export default function Testimonials() {
   return (
-    <div className='relative isolate bg-white pb-32 pt-24 sm:pt-32'>
+    <div className='relative isolate bg-gray-900 pb-32 pt-24 sm:pt-32'>
       <div
         className='absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl'
         aria-hidden='true'
       >
         <div
-          className='ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc]'
+          className='ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-dark-green to-bright-purple'
           style={{
             clipPath:
               'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
@@ -113,10 +113,10 @@ export default function Testimonials() {
       </div>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-xl text-center'>
-          <h2 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
+          <h2 className='text-lg font-semibold leading-8 tracking-tight text-bright-yellow'>
             Testimonials
           </h2>
-          <p className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <p className='mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl'>
             Voices from Our Football Community
           </p>
         </div>
