@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
 
-export default function Hero() {
+export default function Hero({
+  setBookingModalOpen,
+}: {
+  setBookingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className='relative isolate bg-gray-900'>
       <div
@@ -35,12 +39,13 @@ export default function Hero() {
               football excitement.
             </p>
             <div className='mt-10 flex items-center gap-x-6'>
-              <a
-                href='#'
+              <button
+                onClick={() => setBookingModalOpen(true)}
+                type='button'
                 className='rounded-md bg-bright-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-bright-purple-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple'
               >
                 Book Now
-              </a>
+              </button>
               <a
                 href='#features'
                 className='text-sm font-semibold leading-6 text-white'
