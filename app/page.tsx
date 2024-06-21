@@ -1,10 +1,10 @@
-import Footer from '@/components/footer';
-import Contact from '@/components/contact';
-import Features from '@/components/features';
-// import Header from '@/components/header';
-import Hero from '@/components/hero';
-import Pricing from '@/components/pricing';
-import Testimonials from '@/components/testimonials';
+import Footer from '@/compositions/footer';
+import Contact from '@/compositions/contact';
+import Features from '@/compositions/features';
+// import Header from '@/compositions/header';
+import Hero from '@/compositions/hero';
+import Pricing from '@/compositions/pricing';
+import Testimonials from '@/compositions/testimonials';
 
 
 // export const runtime = 'edge';
