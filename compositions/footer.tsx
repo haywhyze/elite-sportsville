@@ -3,7 +3,7 @@ import { JSX, SVGProps } from 'react';
 const navigation = [
   {
     name: 'Facebook',
-    href: '#',
+    href: 'https://www.facebook.com/people/Elite-SportsVille/61558499127155/',
     icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
         <path
@@ -16,7 +16,7 @@ const navigation = [
   },
   {
     name: 'Instagram',
-    href: '#',
+    href: 'https://www.instagram.com/elite_sportsville/',
     icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
         <path
@@ -29,7 +29,7 @@ const navigation = [
   },
   {
     name: 'X',
-    href: '#',
+    href: 'https://x.com/e_Sportsville',
     icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
         <path d='M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z' />
@@ -38,7 +38,7 @@ const navigation = [
   },
   {
     name: 'WhatsApp',
-    href: '#',
+    href: 'https://wa.me/+2349034181221?text=Hello%20Elite%20Sportsville',
     icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
         <path d='M20.401 3.489A11.775 11.775 0 0 0 11.99 0C5.44 0 .102 5.338.096 11.889c0 2.098.549 4.14 1.586 5.947L0 24l6.306-1.653a11.85 11.85 0 0 0 5.685 1.448h.006c6.548 0 11.886-5.338 11.892-11.89a11.85 11.85 0 0 0-3.488-8.416zM11.99 21.781a9.9 9.9 0 0 1-5.034-1.38l-.36-.216-3.74.98.998-3.65-.234-.376a9.84 9.84 0 0 1-1.51-5.258c0-5.441 4.437-9.878 9.878-9.878a9.84 9.84 0 0 1 6.99 2.897 9.84 9.84 0 0 1 2.892 6.99c-.005 5.459-4.446 9.89-9.89 9.89m5.423-7.401c-.296-.149-1.755-.867-2.03-.969-.273-.097-.473-.148-.668.148-.2.296-.77.97-.941 1.162-.171.199-.35.222-.647.074-.297-.148-1.261-.457-2.388-1.478-.885-.788-1.477-1.763-1.652-2.057-.172-.297-.017-.456.132-.605.13-.132.297-.35.445-.522.15-.171.2-.297.296-.494.097-.199.051-.37-.022-.518-.073-.148-.667-1.615-.918-2.205-.24-.583-.485-.503-.668-.512-.171-.01-.37-.01-.57-.01a1.096 1.096 0 0 0-.793.37c-.273.296-1.036 1.016-1.036 2.481s1.064 2.873 1.215 3.075c.148.2 2.09 3.198 5.073 4.488.705.307 1.26.488 1.694.628.712.228 1.356.193 1.868.12.57-.087 1.757-.72 2.007-1.414.246-.696.246-1.29.171-1.414-.074-.122-.273-.197-.57-.346' />
@@ -47,7 +47,7 @@ const navigation = [
   },
   {
     name: 'YouTube',
-    href: '#',
+    href: 'https://www.youtube.com/@elitesportsville',
     icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
         <path
@@ -70,6 +70,8 @@ export default function Footer() {
               key={item.name}
               href={item.href}
               className='text-gray-500 hover:text-gray-400'
+              target='_blank'
+              rel='noreferrer'
             >
               <span className='sr-only'>{item.name}</span>
               <item.icon className='h-6 w-6' aria-hidden='true' />

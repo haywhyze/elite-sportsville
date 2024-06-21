@@ -56,7 +56,9 @@ export default function Hero() {
               className='object-cover'
               src='/hero.jpg' // Update the path to your image
               alt='Description of the image'
-              layout='fill'
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
         </div>

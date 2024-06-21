@@ -74,6 +74,7 @@ export default function Features() {
             className='mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10'
             width={2432}
             height={1442}
+            priority
           />
           <div className='relative' aria-hidden='true'>
             <div className='absolute -inset-x-20 bottom-0 bg-gradient-to-t from-gray-900 pt-[7%]' />
