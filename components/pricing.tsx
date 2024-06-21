@@ -21,21 +21,21 @@ const tiers = [
     name: 'Daytime Football',
     id: 'tier-daytime',
     href: '#',
-    priceHourly: '₦9,000',
+    priceHourly: '₦10,000',
     description:
-      'Enjoy football during the day with our affordable rates. Special 500 NGN per player pricing during specified times.',
+      'Enjoy football during the day with our affordable rates. ',
     features: [
       'Available from 7AM to 11AM and 4PM to 7PM',
       'Ideal for early risers and those looking to unwind',
       'Enjoy the cool morning or evening breeze',
-      '₦500 per player during specified times (minimum 15 players)',
+      // '₦700 per player during specified times (minimum 15 players)',
     ],
   },
   {
     name: 'Night Football',
     id: 'tier-night',
     href: '#',
-    priceHourly: '₦12,000',
+    priceHourly: '₦15,000',
     description:
       'Play under the stars with our well-lit pitches. Experience night football at its best.',
     features: [
