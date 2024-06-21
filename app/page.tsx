@@ -1,13 +1,13 @@
 "use client"
 
 import { useState } from 'react';
-import Footer from '@/compositions/footer';
-import Contact from '@/compositions/contact';
-import Features from '@/compositions/features';
+import Footer from '@/components/compositions/footer';
+import Contact from '@/components/compositions/contact';
+import Features from '@/components/compositions/features';
 // import Header from '@/compositions/header';
-import Hero from '@/compositions/hero';
-import Pricing from '@/compositions/pricing';
-import Testimonials from '@/compositions/testimonials';
+import Hero from '@/components/compositions/hero';
+import Pricing from '@/components/compositions/pricing';
+import Testimonials from '@/components/compositions/testimonials';
 
 
 // export const runtime = 'edge';
