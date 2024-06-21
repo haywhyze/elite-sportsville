@@ -1,0 +1,27 @@
+/* Custom styles for react-datepicker using Tailwind CSS */
+.custom-calendar {
+  @apply bg-white border border-gray-300 rounded-md shadow-lg font-default;
+}
+
+.react-datepicker__header {
+  @apply bg-bright-yellow text-white py-2;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day {
+  @apply text-sm;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  @apply bg-bright-purple text-white !important;
+}
+
+.react-datepicker__day--today {
+  @apply bg-gray-200;
+}
+
+.react-datepicker__navigation-icon::before {
+  @apply border-dark-green/80 hover:border-dark-green;
+}

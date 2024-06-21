@@ -30,21 +30,17 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     <div>
       {/* Add your modal content here */}
       {isOpen && (
-        <Dialog size='3xl' open={isOpen} onClose={setIsOpen}>
+        <Dialog
+          size='3xl'
+          open={isOpen}
+          onClose={setIsOpen}
+          className='dark:bg-gray-900 dark:text-white'
+        >
           <DialogTitle>Book the Pitch</DialogTitle>
           <DialogDescription>
-            Please fill out the form below to book the pitch. Provide your
-            details and preferred time slots. We will confirm your booking via
-            email.
+            Select a date and time slot to book the pitch
           </DialogDescription>
-          <DialogBody>
-            {/* <Field>
-              <Label>Date</Label>
-              <Description>
-                Select the date you want to book the pitch.
-              </Description>
-              <Input type="time" name='booking_date' />
-            </Field> */}
+          <DialogBody className='flex flex-col lg:flex-row items-center lg:items-start'>
             <CustomDatePicker
               selectedDate={selectedDate}
               handleDateChange={handleDateChange}
@@ -53,8 +49,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
           <DialogActions>
             {/* <Button plain onClick={() => setIsOpen(false)}>
               Cancel
-            </Button>
-            <Button onClick={() => setIsOpen(false)}>Refund</Button> */}
+            </Button> */}
           </DialogActions>
         </Dialog>
       )}
