@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/button';
+import { toast } from 'react-toastify';
 import {
   Dialog,
   DialogActions,
@@ -65,6 +66,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     }
     // limit selection to 5 slots only
     if (selectedTimeSlots.length >= 5) {
+      notifyErrorMessage('You can only book a maximum of 5 slots at a time');
       return;
     }
     setSelectedTimeSlots((prev) => {
@@ -80,6 +82,20 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     afternoon: 'bg-green-400',
     evening: 'bg-blue-400',
     night: 'bg-purple-400',
+  };
+
+  const notifyErrorMessage = (message: string) => {
+    toast.error(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      toastId: 'booking-error-toast',
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      className: 'bg-gray-900 text-white',
+    });
   };
 
   return (

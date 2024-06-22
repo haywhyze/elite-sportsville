@@ -1,5 +1,7 @@
 import './globals.css'
 import { Montserrat } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   metadataBase: new URL('https://elitesportsville.com'),
@@ -25,7 +27,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className='scroll-smooth'>
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        {children}
+        <ToastContainer />
+      </body>
     </html>
   );
 }
