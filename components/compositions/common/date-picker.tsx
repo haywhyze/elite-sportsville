@@ -32,19 +32,17 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   CustomInput.displayName = 'CustomInput';
 
   return (
-    <div>
-      <DatePicker
-        selected={selectedDate}
-        onChange={handleDateChange}
-        minDate={new Date()}
-        maxDate={addMonths(new Date(), 3)}
-        dateFormat='eeee, do MMMM, yyyy'
-        placeholderText='Select a date between today and 3 months from now'
-        customInput={<CustomInput />}
-        className='block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-bright-purple focus:border-bright-purple sm:text-sm'
-        calendarClassName='custom-calendar'
-      />
-    </div>
+    <DatePicker
+      selected={selectedDate}
+      onChange={handleDateChange}
+      minDate={new Date()}
+      maxDate={addMonths(new Date(), 3)}
+      dateFormat='eeee, do MMMM, yyyy'
+      placeholderText='Select a date between today and 3 months from now'
+      customInput={<CustomInput />}
+      className='block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-bright-purple focus:border-bright-purple sm:text-sm'
+      calendarClassName='custom-calendar'
+    />
   );
 };
 
