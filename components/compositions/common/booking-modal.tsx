@@ -16,6 +16,7 @@ import { Switch } from '@/components/switch';
 import Tabs from '@/components/tabs';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
+import { sortTimeSlots } from '@/lib/utils';
 
 interface BookingModalProps {
   // Define the props for the booking modal here
@@ -103,7 +104,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
       {/* Add your modal content here */}
       {isOpen && (
         <Dialog
-          size='5xl'
+          size='4xl'
           open={isOpen}
           onClose={setIsOpen}
           className='dark:bg-gray-900 dark:text-white'
@@ -173,7 +174,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                     : 'No time slot selected'}
                   {selectedTimeSlots.length > 0 && (
                     <ul role='list' className='mt-3 grid grid-cols-1 gap-5'>
-                      {selectedTimeSlots.map((slot) => (
+                      {sortTimeSlots(selectedTimeSlots).map((slot) => (
                         <li
                           key={slot}
                           className='col-span-1 flex rounded-md shadow-sm'
