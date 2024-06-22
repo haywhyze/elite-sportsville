@@ -24,7 +24,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         ref={ref}
         className='rounded-md bg-bright-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-bright-purple-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple'
       >
-        {value}
+        {value || 'Select a date'}
       </button>
     )
   ) as React.ForwardRefRenderFunction<HTMLButtonElement, any>;
