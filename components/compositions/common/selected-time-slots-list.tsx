@@ -5,13 +5,13 @@ import { sortTimeSlots } from '@/lib/utils';
 
 interface SelectedTimeSlotsListProps {
   selectedTimeSlots: string[];
-  // setSelectedTimeSlots: (slots: (prev: string[]) => string[]) => void;
+  setSelectedTimeSlots: (slots: (prev: string[]) => string[]) => void;
   periodColors: { [key: string]: string };
 }
 
 const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
   selectedTimeSlots,
-  // setSelectedTimeSlots,
+  setSelectedTimeSlots,
   periodColors,
 }) => {
 
