@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Dropdown, DropdownButton, DropdownMenu, DropdownItem } from './dropdown';
 
 /*
   This example requires some changes to your config:
@@ -33,6 +34,9 @@ export default function Tabs({
   selectedTab: Tab;
   setSelectedTab: (tab: Tab) => void;
 }) {
+  const handleTabSelect = (tab: Tab) => {
+    setSelectedTab(tab);
+  };
   return (
     <div>
       <div className='sm:hidden'>
@@ -40,23 +44,21 @@ export default function Tabs({
           Select a tab
         </label>
         {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-        <select
-          id='tabs'
-          name='tabs'
-          className='block w-full bg-gray-900 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
-          defaultValue={
-            tabs.find((tab) => tab.id === selectedTab.id)?.name || ''
-          }
-          onChange={(e) =>
-            setSelectedTab(
-              tabs.find((tab) => tab.name === e.target.value) || tabs[0]
-            )
-          }
-        >
-          {tabs.map((tab) => (
-            <option key={tab.name}>{tab.name}</option>
-          ))}
-        </select>
+        <Dropdown>
+          <DropdownButton
+            as='button'
+            className='block mx-auto px-4 py-1 bg-gray-900 rounded-md border border-gray-300 focus:border-bright-yellow focus:ring-bright-yellow'
+          >
+            {selectedTab.name}
+          </DropdownButton>
+          <DropdownMenu className='w-full bg-white dark:bg-gray-900 rounded-md shadow-lg mt-2'>
+            {tabs.map((tab) => (
+              <DropdownItem key={tab.id} onClick={() => handleTabSelect(tab)}>
+                {tab.name}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
       <div className='hidden sm:block'>
         <nav className='flex space-x-2' aria-label='Tabs'>
@@ -75,7 +77,6 @@ export default function Tabs({
               aria-current={tab.id === selectedTab.id ? 'page' : undefined}
             >
               <span>{tab.name}</span>
-             
             </button>
           ))}
         </nav>
