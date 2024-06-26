@@ -140,8 +140,8 @@ const styles = {
       '[--btn-icon:theme(colors.violet.300)] data-[active]:[--btn-icon:theme(colors.violet.200)] data-[hover]:[--btn-icon:theme(colors.violet.200)]',
     ],
     purple: [
-      'text-white [--btn-hover-overlay:theme(colors.white/10%)] [--btn-bg:theme(colors.purple.500)] [--btn-border:theme(colors.purple.600/90%)]',
-      '[--btn-icon:theme(colors.purple.300)] data-[active]:[--btn-icon:theme(colors.purple.200)] data-[hover]:[--btn-icon:theme(colors.purple.200)]',
+      'text-white [--btn-hover-overlay:theme(colors.white/10%)] [--btn-bg:theme(colors.custom-purple)] [--btn-border:theme(colors.custom-purple-dark/90%)]',
+      '[--btn-icon:theme(colors.bright-purple)] data-[active]:[--btn-icon:theme(colors.500066)] data-[hover]:[--btn-icon:theme(colors.ustom-purple-light)]',
     ],
     fuchsia: [
       'text-white [--btn-hover-overlay:theme(colors.white/10%)] [--btn-bg:theme(colors.fuchsia.500)] [--btn-border:theme(colors.fuchsia.600/90%)]',
@@ -156,7 +156,7 @@ const styles = {
       '[--btn-icon:theme(colors.rose.300)] data-[active]:[--btn-icon:theme(colors.rose.200)] data-[hover]:[--btn-icon:theme(colors.rose.200)]',
     ],
   },
-}
+};
 
 type ButtonProps = (
   | { color?: keyof typeof styles.colors; outline?: never; plain?: never }
@@ -182,7 +182,7 @@ export const Button = forwardRef(function Button(
       <TouchTarget>{children}</TouchTarget>
     </Link>
   ) : (
-    <Headless.Button {...props} className={clsx(classes, 'cursor-default')} ref={ref}>
+    <Headless.Button {...props} className={clsx(classes, 'cursor-pointer')} ref={ref}>
       <TouchTarget>{children}</TouchTarget>
     </Headless.Button>
   )
