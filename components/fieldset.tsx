@@ -6,7 +6,7 @@ export function Fieldset({ className, ...props }: { className?: string } & Omit<
   return (
     <Headless.Fieldset
       {...props}
-      className={clsx(className, '[&>*+[data-slot=control]]:mt-6 [&>[data-slot=text]]:mt-1')}
+      className={clsx(className, '[&>*+[data-slot=control]]:mt-2 [&>[data-slot=text]]:mt-1')}
     />
   )
 }
