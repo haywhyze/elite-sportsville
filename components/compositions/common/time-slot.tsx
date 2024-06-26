@@ -18,10 +18,11 @@ const TimeSlot = ({
       className={classNames(
         'px-1 py-2 w-[calc(35%-1rem)] lg:w-[calc(20%-1rem)] text-xs lg:text-sm border rounded-md shadow-sm',
         {
-          'bg-dark-purple text-white': selected,
+          'outline outline-2 outline-offset-1 outline-dark-green bg-green-200 text-dark-purple':
+            selected,
           'text-dark-purple bg-green-50': !selected && !isBooked,
           'cursor-not-allowed bg-gray-600 text-gray-100': isBooked,
-          'cursor-pointer lg:hover:bg-dark-purple lg:hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-yellow':
+          'cursor-pointer lg:hover:bg-green-100 lg:hover:text-dark-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-yellow':
             !isBooked,
         }
       )}
