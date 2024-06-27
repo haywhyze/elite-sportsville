@@ -27,6 +27,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <SelectedTimeSlotsList
           selectedTimeSlots={selectedTimeSlots}
           setSelectedTimeSlots={setSelectedTimeSlots}
+          viewOnly
         />
       )}
       <form className='mt-6 w-full'>

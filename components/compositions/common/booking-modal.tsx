@@ -99,7 +99,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                 Select a date and time slot to book the pitch
               </DialogDescription>
               <DialogBody className='flex flex-col lg:flex-row lg:items-start mt-0 lg:mt-3'>
-                <div className='w-full lg:w-2/3 mt-3 flex justify-center items-center lg:items-start flex-col'>
+                <div className='w-full lg:w-2/3 mt-3 flex justify-start items-center sm:items-start flex-col'>
                   <CustomDatePicker
                     selectedDate={selectedDate}
                     handleDateChange={handleDateChange}
@@ -111,7 +111,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                         selectedTab={selectedTab}
                         setSelectedTab={setSelectedTab}
                       />
-                      <div className='flex flex-wrap gap-2 my-6 justify-center items-center sm:justify-start'>
+                      <div className='flex flex-wrap gap-2 my-6 justify-center sm:justify-start items-start'>
                         {timeSlotsIntoPeriods[selectedTab.id].map(
                           (time: any) => (
                             <TimeSlot
@@ -132,7 +132,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                     </div>
                   )}
                 </div>
-                <div className='w-full lg:w-1/3 text-center flex justify-center flex-col'>
+                <div className='w-full lg:w-1/3 text-center sm:text-left flex justify-center flex-col'>
                   {selectedDate && (
                     <SelectedTimeSlotsList
                       selectedTimeSlots={selectedTimeSlots}
@@ -201,7 +201,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
             )}
             {bookingSteps < 2 && (
               <Button
-                outline
+                color='purple'
+                disabled={selectedTimeSlots.length === 0}
                 onClick={() => {
                   if (bookingSteps === 1) {
                     if (selectedTimeSlots.length === 0) {

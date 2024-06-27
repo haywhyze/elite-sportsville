@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Dropdown, DropdownButton, DropdownMenu, DropdownItem } from './dropdown';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 /*
   This example requires some changes to your config:
@@ -49,6 +50,7 @@ export default function Tabs({
             className='block mx-auto px-4 py-1 bg-gray-900 rounded-md border border-gray-300 focus:border-bright-yellow focus:ring-bright-yellow'
           >
             {selectedTab.name}
+            <ChevronDownIcon className='w-5 h-5 ml-2 -mr-1 inline-block' aria-hidden='true' />
           </DropdownButton>
           <DropdownMenu className='w-full bg-white dark:bg-gray-900 rounded-md shadow-lg mt-2'>
             {tabs.map((tab) => (

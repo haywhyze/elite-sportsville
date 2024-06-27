@@ -14,11 +14,13 @@ interface SelectedTimeSlotsListProps {
     price?: number;
   }[];
   setSelectedTimeSlots: (value: any) => void;
+  viewOnly?: boolean;
 }
 
 const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
   selectedTimeSlots,
   setSelectedTimeSlots,
+  viewOnly,
 }) => {
   const periodIcons: { [key: string]: JSX.Element } = {
     morning: <Sunrise />,
@@ -99,17 +101,22 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
 
   return (
     <>
-      <h4>
-        {selectedTimeSlots.length > 0
-          ? 'Selected Time Slots'
-          : 'No time slots selected'}
-      </h4>
+      {!viewOnly && (
+        <h4>
+          {selectedTimeSlots.length > 0
+            ? 'Selected Time Slots'
+            : 'No time slots selected'}
+        </h4>
+      )}
       {selectedTimeSlots.length > 0 && (
-        <ul role='list' className='mt-3 grid grid-cols-1 gap-5'>
+        <ul
+          role='list'
+          className='mt-3 flex flex-wrap gap-2 justify-center sm:justify-start'
+        >
           {mergeTimeSlots(selectedTimeSlots).map((slot) => (
             <li
               key={slot.id}
-              className='col-span-1 flex rounded-md shadow-sm text-left'
+              className='col-span-1 flex rounded-md shadow-sm text-left max-w-72'
             >
               {periodColors && (
                 <div
@@ -138,24 +145,24 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
                     })}
                   </p>
                 </div>
-                <div className='flex-shrink-0 pr-2'>
-                  <button
-                    type='button'
-                    onClick={() =>
-                      {
+                {!viewOnly && (
+                  <div className='flex-shrink-0 pr-2'>
+                    <button
+                      type='button'
+                      onClick={() => {
                         setSelectedTimeSlots(
                           selectedTimeSlots.filter(
                             (timeSlot) => !slot.ids.includes(timeSlot.id)
                           )
                         );
-                      }
-                    }
-                    className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-red-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1'
-                  >
-                    <span className='sr-only'>Remove</span>
-                    <XMarkIcon className='h-5 w-5' aria-hidden='true' />
-                  </button>
-                </div>
+                      }}
+                      className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-red-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1'
+                    >
+                      <span className='sr-only'>Remove</span>
+                      <XMarkIcon className='h-5 w-5' aria-hidden='true' />
+                    </button>
+                  </div>
+                )}
               </div>
             </li>
           ))}
