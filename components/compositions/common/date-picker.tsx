@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './date-picker.css';
+import { ChevronDownIcon } from 'lucide-react';
 
 interface CustomDatePickerProps {
   selectedDate: Date | null;
@@ -25,6 +26,10 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         className='rounded-md bg-bright-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-bright-purple-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple'
       >
         {value || 'Select a date'}
+        <ChevronDownIcon
+          className='w-5 h-5 ml-2 -mr-1 inline-block'
+          aria-hidden='true'
+        />
       </button>
     )
   ) as React.ForwardRefRenderFunction<HTMLButtonElement, any>;

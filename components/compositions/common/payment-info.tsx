@@ -11,7 +11,7 @@ export default function PaymentInfo() {
             aria-hidden='true'
           />
         </div>
-        <div className='ml-3 flex-1 md:flex md:justify-between'>
+        <div className='ml-3 flex-1 n'>
           <h3 className='font-medium text-bright-yellow'>
             Payment Instructions:
           </h3>
