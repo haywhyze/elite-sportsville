@@ -36,9 +36,6 @@ export const sortTimeSlots = (slots: {
   startTime?: number;
   endTime?: number;
 }[]) => {
-  console.log({
-    parseDateTime: slots.map(parseDateTime),
-  })
   return slots.sort((a, b) => {
     return parseDateTime(a).getTime() - parseDateTime(b).getTime();
   });
@@ -67,7 +64,7 @@ export function generateTimeSlotsForDate(date: Date) {
     const period = getPeriod(hour);
 
     timeSlots.push({
-      id: `time-slot-${date.toDateString()}-${startTimeString} - ${endTimeString}-${period}`,
+      id: `time-slot-${date.getTime()}|||${startTimeString}-${endTimeString}|||${period}`,
       time: `${startTimeString} - ${endTimeString}`,
       date: new Date(date).toISOString(),
       period: period,

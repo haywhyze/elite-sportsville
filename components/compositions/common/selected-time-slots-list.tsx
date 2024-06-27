@@ -51,7 +51,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
 
   const mergeTimeSlots = (
     slots: {
-      id: number;
+      id: string | number;
       time: string;
       date: string;
       period: string;
@@ -60,15 +60,32 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
       endTime?: number;
     }[]
   ) => {
+    if (!slots.length) return [];
+    const parsedSlots = slots.map((slot) => ({
+      startTime: slot.time.split(' - ')[0],
+      endTime: slot.time.split(' - ')[1],
+      period: slot.period,
+      date: slot.date,
+      id: slot.id,
+      ids: [slot.id],
+      time: slot.time,
+    }));
+
     const mergedSlots = [];
-    let currentSlot = slots[0];
-    for (let i = 1; i < slots.length; i++) {
-      const nextSlot = slots[i];
+    let currentSlot = parsedSlots[0];
+
+    for (let i = 1; i < parsedSlots.length; i++) {
+      const nextSlot = parsedSlots[i];
+
       if (
+        currentSlot.endTime === nextSlot.startTime &&
         currentSlot.date === nextSlot.date &&
         currentSlot.period === nextSlot.period
       ) {
         currentSlot.endTime = nextSlot.endTime;
+        currentSlot.ids = [...currentSlot.ids, nextSlot.id];
+        currentSlot.id = currentSlot.ids.join('-');
+        currentSlot.time = `${currentSlot.startTime} - ${currentSlot.endTime}`;
       } else {
         mergedSlots.push(currentSlot);
         currentSlot = nextSlot;
@@ -89,7 +106,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
       </h4>
       {selectedTimeSlots.length > 0 && (
         <ul role='list' className='mt-3 grid grid-cols-1 gap-5'>
-          {selectedTimeSlots.map((slot) => (
+          {mergeTimeSlots(selectedTimeSlots).map((slot) => (
             <li
               key={slot.id}
               className='col-span-1 flex rounded-md shadow-sm text-left'
@@ -125,9 +142,13 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
                   <button
                     type='button'
                     onClick={() =>
-                      setSelectedTimeSlots((prev: any) =>
-                        prev.filter((s: any) => s.id !== slot.id)
-                      )
+                      {
+                        setSelectedTimeSlots(
+                          selectedTimeSlots.filter(
+                            (timeSlot) => !slot.ids.includes(timeSlot.id)
+                          )
+                        );
+                      }
                     }
                     className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-red-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1'
                   >
