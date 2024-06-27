@@ -5,12 +5,20 @@ import { Fieldset, Label } from '@/components/fieldset';
 import SelectedTimeSlotsList from './selected-time-slots-list';
 
 interface BookingFormProps {
-  selectedTimeSlots: string[];
+  selectedTimeSlots: {
+    id: number;
+    time: string;
+    date: string;
+    period: string;
+    price?: number;
+  }[];
   selectedDate: Date | null;
+  setSelectedTimeSlots: (value: any) => void;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
   selectedTimeSlots,
+  setSelectedTimeSlots,
   selectedDate,
 }) => {
   return (
@@ -18,7 +26,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
       {selectedDate && (
         <SelectedTimeSlotsList
           selectedTimeSlots={selectedTimeSlots}
-          // setSelectedTimeSlots={setSelectedTimeSlots}
+          setSelectedTimeSlots={setSelectedTimeSlots}
         />
       )}
       <form className='mt-6 w-full'>
