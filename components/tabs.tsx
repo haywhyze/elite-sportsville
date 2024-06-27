@@ -18,7 +18,6 @@ import { Dropdown, DropdownButton, DropdownMenu, DropdownItem } from './dropdown
 type Tab = {
   name: string;
   id: string;
-  current: boolean;
 };
 
 function classNames(...classes: string[]) {
