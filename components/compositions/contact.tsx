@@ -12,7 +12,6 @@
   }
   ```
 */
-import { MapIcon } from '@heroicons/react/20/solid';
 import {
   BuildingOffice2Icon,
   EnvelopeIcon,
