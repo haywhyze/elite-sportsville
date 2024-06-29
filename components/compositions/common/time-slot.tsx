@@ -16,7 +16,7 @@ const TimeSlot = ({
   return (
     <button
       className={classNames(
-        'px-1 py-2 lg:w-[calc(20%-1rem)] text-xs lg:text-sm border rounded-md shadow-sm w-24',
+        'px-1 py-2 text-xs lg:text-sm border rounded-md shadow-sm w-24',
         {
           'outline outline-2 outline-offset-1 outline-dark-green bg-green-200 text-dark-purple':
             selected,
