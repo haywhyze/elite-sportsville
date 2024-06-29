@@ -8,7 +8,7 @@ import Features from '@/components/compositions/features';
 import Hero from '@/components/compositions/hero';
 import Pricing from '@/components/compositions/pricing';
 import Testimonials from '@/components/compositions/testimonials';
-import BookingModal from '@/components/compositions/common/booking-modal';
+import BookingModal from '@/components/compositions/booking-modal';
 
 
 // export const runtime = 'edge';
