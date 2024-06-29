@@ -71,6 +71,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
       id: slot.id,
       ids: [slot.id],
       time: slot.time,
+      price: slot.price,
     }));
 
     const mergedSlots = [];
@@ -88,6 +89,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
         currentSlot.ids = [...currentSlot.ids, nextSlot.id];
         currentSlot.id = currentSlot.ids.join('-');
         currentSlot.time = `${currentSlot.startTime} - ${currentSlot.endTime}`;
+        currentSlot.price = (currentSlot.price || 0) + (nextSlot.price || 0);
       } else {
         mergedSlots.push(currentSlot);
         currentSlot = nextSlot;
@@ -116,7 +118,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
           {mergeTimeSlots(selectedTimeSlots).map((slot) => (
             <li
               key={slot.id}
-              className='col-span-1 flex rounded-md shadow-sm text-left max-w-72'
+              className='col-span-1 flex rounded-md shadow-sm text-left w-full'
             >
               {periodColors && (
                 <div
@@ -125,7 +127,7 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
                     slot.period === 'afternoon' && 'bg-yellow-400',
                     slot.period === 'evening' && 'bg-orange-400',
                     slot.period === 'night' && 'bg-blue-900 text-white',
-                    'flex flex-shrink-0 items-center justify-center rounded-l-md text-sm text-gray-900 font-semibold px-4'
+                    'flex flex-shrink-0 items-center justify-center rounded-l-md text-sm text-gray-900 font-semibold px-2'
                   )}
                 >
                   {periodIcons[slot.period]}
@@ -145,8 +147,17 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
                     })}
                   </p>
                 </div>
-                {!viewOnly && (
-                  <div className='flex-shrink-0 pr-2'>
+                <div className='flex-shrink-0 flex items-center'>
+                  <div className='text-gray-900 text-sm font-medium px-1'>
+                    {slot.price
+                      ? `${slot.price.toLocaleString('en-NG', {
+                          style: 'currency',
+                          currency: 'NGN',
+                          minimumFractionDigits: 0,
+                        })}`
+                      : 'Free'}
+                  </div>
+                  {!viewOnly && (
                     <button
                       type='button'
                       onClick={() => {
@@ -156,13 +167,13 @@ const SelectedTimeSlotsList: React.FC<SelectedTimeSlotsListProps> = ({
                           )
                         );
                       }}
-                      className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-red-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1'
+                      className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-red-500 hover:text-red-600 focus:outline-none focus:ring-red-500'
                     >
                       <span className='sr-only'>Remove</span>
                       <XMarkIcon className='h-5 w-5' aria-hidden='true' />
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </li>
           ))}
