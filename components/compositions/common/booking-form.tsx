@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from '@/components/input';
 import { Textarea } from '@/components/textarea';
-import { Fieldset, Label } from '@/components/fieldset';
+import { ErrorMessage, Fieldset, Label } from '@/components/fieldset';
 import SelectedTimeSlotsList from './selected-time-slots-list';
 
 interface BookingFormProps {
@@ -14,13 +14,30 @@ interface BookingFormProps {
   }[];
   selectedDate: Date | null;
   setSelectedTimeSlots: (value: any) => void;
+  formData: any;
+  errors: any;
+  handleInputChange: any;
+  handleBlur: any;
+  nameRef: any;
+  emailRef: any;
+  phoneRef: any;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
   selectedTimeSlots,
   setSelectedTimeSlots,
   selectedDate,
+  formData,
+  errors,
+  handleInputChange,
+  handleBlur,
+  nameRef,
+  emailRef,
+  phoneRef,
 }) => {
+  const { name, email, phone, notes } = formData;
+  const { name: nameError, email: emailError, phone: phoneError } = errors;
+
   return (
     <>
       {selectedDate && (
@@ -31,25 +48,57 @@ const BookingForm: React.FC<BookingFormProps> = ({
         />
       )}
       <form className='mt-6 w-full'>
-        {/* <div className='mt-6'>
-        <h4 className='text-md font-medium'>Pricing:</h4>
-        <p className='mt-2'>Total: ₦</p>
-      </div> */}
         <Fieldset className='mb-4'>
           <Label htmlFor='name'>Name</Label>
-          <Input type='text' name='name' id='name' required />
+          <Input
+            type='text'
+            name='name'
+            id='name'
+            value={name}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            ref={nameRef}
+            required
+          />
+          {nameError && <ErrorMessage>{nameError}</ErrorMessage>}
         </Fieldset>
         <Fieldset className='mb-4'>
           <Label htmlFor='email'>Email</Label>
-          <Input type='email' name='email' id='email' required />
+          <Input
+            type='email'
+            name='email'
+            id='email'
+            value={email}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            ref={emailRef}
+            required
+          />
+          {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
         </Fieldset>
         <Fieldset className='mb-4'>
           <Label htmlFor='phone'>Phone</Label>
-          <Input type='tel' name='phone' id='phone' required />
+          <Input
+            type='tel'
+            name='phone'
+            id='phone'
+            value={phone}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            ref={phoneRef}
+            required
+          />
+          {phoneError && <ErrorMessage>{phoneError}</ErrorMessage>}
         </Fieldset>
         <Fieldset className='mb-4'>
           <Label htmlFor='notes'>Additional Notes</Label>
-          <Textarea name='notes' id='notes' rows={4} />
+          <Textarea
+            name='notes'
+            id='notes'
+            value={notes}
+            onChange={handleInputChange}
+            rows={4}
+          />
         </Fieldset>
       </form>
     </>

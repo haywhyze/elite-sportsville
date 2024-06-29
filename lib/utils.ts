@@ -1,4 +1,5 @@
 import ms from 'ms'
+import { toast } from 'react-toastify';
 
 export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
   if (!timestamp) return 'never'
@@ -73,4 +74,41 @@ export function generateTimeSlotsForDate(date: Date) {
   }
 
   return timeSlots;
+}
+
+import { ToastOptions, ToastPosition } from 'react-toastify';
+
+export function notify({
+  message,
+  type = 'success',
+  duration = 5000,
+  toastId
+}: {
+  message: string;
+  type: 'success' | 'error' | 'info';
+  duration?: number;
+  toastId?: string;
+}) {
+  const options: ToastOptions<unknown> = {
+    position: 'top-right' as ToastPosition,
+    autoClose: duration,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    toastId
+  }
+  switch (type) {
+    case 'success':
+      toast.success(message, options);
+      break;
+    case 'error':
+      toast.error(message, options);
+      break;
+    case 'info':
+      toast.info(message, options);
+      break;
+    default:
+      toast(message, options);
+  }
 }
