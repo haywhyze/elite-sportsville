@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/button';
 import { toast } from 'react-toastify';
 import {
@@ -16,7 +16,7 @@ import BookingForm from './booking-form';
 import { X } from 'lucide-react';
 import PaymentMothod from './payment-method';
 import PaymentInfo from './payment-info';
-import { generateTimeSlotsForDate } from '@/lib/utils';
+import { generateTimeSlotsForDate, notify } from '@/lib/utils';
 import { Tab, tabs } from '@/lib/constants';
 
 interface BookingModalProps {
@@ -27,15 +27,118 @@ interface BookingModalProps {
 const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0]);
-  const [selectedTimeSlots, setSelectedTimeSlots] = useState<{
-    id: number;
-    time: string;
-    date: string;
-    period: string;
-    price?: number;
-  }[]>([]);
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState<
+    {
+      id: number;
+      time: string;
+      date: string;
+      period: string;
+      price?: number;
+    }[]
+  >([]);
   const [bookingSteps, setBookingSteps] = useState<number>(1);
-  const [paymentMethod, setPaymentMethod] = useState<string>('');
+  const [paymentMethod, setPaymentMethod] = useState<string>('online');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    notes: '',
+  });
+
+  const [errors, setErrors] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+  }>({
+    name: '',
+    email: '',
+    phone: '',
+  } as { name: string; email: string; phone: string });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'name':
+        if (!value) return { name: 'Name is required' };
+        return { name: '' };
+      case 'email':
+        if (!value) return { email: 'Email is required' };
+        if (!/\S+@\S+\.\S+/.test(value)) return { email: 'Email is invalid' };
+        return { email: '' };
+      case 'phone':
+        if (!value) return { phone: 'Phone number is required' };
+        if (!/^[0-9]{11}$/.test(value))
+          return { phone: 'Phone number is invalid' };
+        return { phone: '' };
+      default:
+        return {};
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {} as { name: string; email: string; phone: string };
+    const { name, email, phone } = formData;
+    const nameError = validateField('name', name).name;
+    const emailError = validateField('email', email).email;
+    const phoneError = validateField('phone', phone).phone;
+    if (nameError) newErrors.name = nameError;
+    if (emailError) newErrors.email = emailError;
+    if (phoneError) newErrors.phone = phoneError;
+    return newErrors;
+  };
+
+  const handleBlur = (e: any) => {
+    const { name, value } = e.target;
+    const newErrors = validateField(name, value);
+    setErrors((prev) => ({ ...prev, ...newErrors }));
+  };
+
+  const handleSubmit = async () => {
+    const newErrors = validateForm();
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      if (newErrors.name && nameRef.current) nameRef.current.focus();
+      else if (newErrors.email && emailRef.current) emailRef.current.focus();
+      else if (newErrors.phone && phoneRef.current) phoneRef.current.focus();
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Replace with your API call
+      // await saveBooking(formData);
+      console.log('Booking data:', {
+        ...formData,
+        selectedDate,
+        selectedTimeSlots,
+        paymentMethod,
+      });
+      setIsLoading(false);
+      toast.success('Booking successful', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      setIsOpen(false);
+    } catch (error) {
+      setIsLoading(false);
+      alert('An error occurred. Please try again.');
+    }
+  };
 
   const timeSlots = generateTimeSlotsForDate(selectedDate || new Date());
 
@@ -57,21 +160,17 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     } else if (selectedTimeSlots.length < 5) {
       setSelectedTimeSlots((prev) => [...prev, slot]);
     } else {
-      notifyErrorMessage('You can only book a maximum of 5 slots at a time');
+      notify({
+        message: 'You can only book a maximum of 5 slots at a time',
+        type: 'error',
+      });
     }
   };
 
-  const notifyErrorMessage = (message: string) => {
-    toast.error(message, {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      toastId: 'booking-error-toast',
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
+  const totalPrice = selectedTimeSlots.reduce(
+    (acc, slot) => acc + (slot.price || 0),
+    0
+  );
 
   return (
     <div>
@@ -99,7 +198,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                 Select a date and time slot to book the pitch
               </DialogDescription>
               <DialogBody className='flex flex-col lg:flex-row lg:items-start mt-0 lg:mt-3'>
-                <div className='w-full lg:w-2/3 mt-3 flex justify-start items-center sm:items-start flex-col'>
+                <div className='w-full lg:w-3/5 mt-3 flex justify-start items-center sm:items-start flex-col'>
                   <CustomDatePicker
                     selectedDate={selectedDate}
                     handleDateChange={handleDateChange}
@@ -132,7 +231,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                     </div>
                   )}
                 </div>
-                <div className='w-full lg:w-1/3 text-center sm:text-left flex justify-center flex-col'>
+                <div className='w-full lg:w-2/5 text-center sm:text-left flex justify-center flex-col'>
                   {selectedDate && (
                     <SelectedTimeSlotsList
                       selectedTimeSlots={selectedTimeSlots}
@@ -153,9 +252,23 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                     selectedDate={selectedDate}
                     selectedTimeSlots={selectedTimeSlots}
                     setSelectedTimeSlots={setSelectedTimeSlots}
+                    formData={formData}
+                    errors={errors}
+                    handleInputChange={handleInputChange}
+                    handleBlur={handleBlur}
+                    nameRef={nameRef}
+                    emailRef={emailRef}
+                    phoneRef={phoneRef}
                   />
                 </div>
                 <div className='sm:w-1/2'>
+                  {/* Total Price */}
+                  <div className='flex justify-between items-center p-3 bg-gray-800 rounded-lg mb-8 sm:my-6'>
+                    <p className='text-lg font-bold text-bright-yellow'>
+                      Total Price
+                    </p>
+                    <p className='text-lg font-bold text-bright-yellow'>{`₦${totalPrice.toLocaleString()}`}</p>
+                  </div>
                   <PaymentMothod
                     selected={paymentMethod}
                     setSelected={setPaymentMethod}
@@ -173,6 +286,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                 setIsOpen(false);
                 setSelectedDate(null);
                 setSelectedTimeSlots([]);
+                setSelectedTab(tabs[0]);
+                setBookingSteps(1);
               }}
             >
               Cancel
@@ -192,7 +307,21 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                 >
                   Back
                 </Button>
-                <Button color='purple'>
+                <Button
+                  onClick={() => {
+                    if (paymentMethod === 'manual') {
+                      handleSubmit();
+                    } else {
+                      // setBookingSteps(3);
+                    }
+                  }}
+                  color='purple'
+                  disabled={
+                    paymentMethod === '' ||
+                    isLoading ||
+                    Object.values(errors).some((error) => error !== '')
+                  }
+                >
                   {paymentMethod === 'manual'
                     ? 'Reserve Booking'
                     : 'Confirm Booking'}
@@ -206,7 +335,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
                 onClick={() => {
                   if (bookingSteps === 1) {
                     if (selectedTimeSlots.length === 0) {
-                      notifyErrorMessage('Please select a time slot');
+                      notify({
+                        message: 'Please select at least one time slot',
+                        type: 'error',
+                      });
                     } else {
                       setBookingSteps(2);
                     }
