@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/seed.ts"
+    "lib/firebase.js"  
   ],
   "exclude": ["node_modules"]
 }
