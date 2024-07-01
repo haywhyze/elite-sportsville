@@ -1,106 +1,24 @@
-import { useState } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
 import {
   BuildingOffice2Icon,
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline';
-import { notify } from '@/lib/utils';
+import { useContactForm } from '@/lib/hooks/useContactForm';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    message: '',
-  } as {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    message: string;
-  });
-  const [errors, setErrors] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    message: '',
-  } as {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    phoneNumber?: string;
-    message?: string;
-  });
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const validateForm = () => {
-    const newErrors: {
-      firstName?: string;
-      lastName?: string;
-      email?: string;
-      phoneNumber?: string;
-      message?: string;
-    } = {};
-    if (!formData.firstName) newErrors.firstName = 'First name is required';
-    if (!formData.lastName) newErrors.lastName = 'Last name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = 'Email is invalid';
-    if (!formData.phoneNumber)
-      newErrors.phoneNumber = 'Phone number is required';
-    if (!/^[0-9]{11}$/.test(formData.phoneNumber))
-      newErrors.phoneNumber = 'Phone number is invalid';
-    if (!formData.message) newErrors.message = 'Message is required';
-    return newErrors;
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-
-    console.log(
-      'Submitting form data: ',
-      JSON.stringify({
-        ...formData,
-        phoneNumber: `+234${formData.phoneNumber}`,
-      })
-    )
-
-    try {
-      await addDoc(collection(db, 'contacts'), formData);
-      notify({
-        message: 'Message sent successfully',
-        type: 'success',
-      });
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        message: '',
-      });
-    } catch (error) {
-      console.error('Error sending message: ', error);
-      notify({
-        message: 'Failed to send message. Please try again.',
-        type: 'error',
-      });
-    }
-  };
+  const {
+    formData,
+    errors,
+    isLoading,
+    firstNameRef,
+    lastNameRef,
+    emailRef,
+    phoneNumberRef,
+    handleInputChange,
+    handleBlur,
+    handleSubmit,
+  } = useContactForm();
 
   return (
     <div className='relative isolate bg-gray-900'>
@@ -225,6 +143,8 @@ export default function Contact() {
                     className='block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-bright-purple-dark sm:text-sm sm:leading-6'
                     value={formData.firstName}
                     onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    ref={firstNameRef}
                   />
                   {errors.firstName && (
                     <p className='text-red-500 text-xs mt-1'>
@@ -249,6 +169,8 @@ export default function Contact() {
                     className='block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-bright-purple-dark sm:text-sm sm:leading-6'
                     value={formData.lastName}
                     onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    ref={lastNameRef}
                   />
                   {errors.lastName && (
                     <p className='text-red-500 text-xs mt-1'>
@@ -273,6 +195,8 @@ export default function Contact() {
                     className='block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-bright-purple-dark sm:text-sm sm:leading-6'
                     value={formData.email}
                     onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    ref={emailRef}
                   />
                   {errors.email && (
                     <p className='text-red-500 text-xs mt-1'>{errors.email}</p>
@@ -295,6 +219,8 @@ export default function Contact() {
                     className='block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-bright-purple-dark sm:text-sm sm:leading-6'
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    ref={phoneNumberRef}
                   />
                   {errors.phoneNumber && (
                     <p className='text-red-500 text-xs mt-1'>
@@ -330,6 +256,7 @@ export default function Contact() {
             <div className='mt-8 flex justify-end'>
               <button
                 type='submit'
+                disabled={isLoading}
                 className='rounded-md bg-bright-purple-dark px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-bright-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple-dark'
               >
                 Send message
