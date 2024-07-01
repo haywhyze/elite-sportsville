@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 import BookingStepOne from './step-one';
 import BookingStepTwo from './step-two';
 import BookingActions from './booking-actions';
-import { useBookingForm } from '@/lib/hooks'; // Import the custom hook
+import { useBookingForm } from '@/lib/hooks/useBookingForm'; // Import the custom hook
 
 interface BookingModalProps {
   isOpen: boolean;
