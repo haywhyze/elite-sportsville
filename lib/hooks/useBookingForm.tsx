@@ -11,6 +11,7 @@ interface Errors {
   name: string;
   email: string;
   phone: string;
+  [key: string]: string;
 }
 
 export const useBookingForm = () => {
@@ -46,6 +47,8 @@ export const useBookingForm = () => {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error message when user starts typing
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const validateField = (name: string, value: string) => {
