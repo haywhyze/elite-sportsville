@@ -5,6 +5,7 @@ import BookingStepOne from './step-one';
 import BookingStepTwo from './step-two';
 import BookingActions from './booking-actions';
 import { useBookingForm } from '@/lib/hooks/useBookingForm'; // Import the custom hook
+import { useFetchBooking } from '@/lib/hooks/useFetchBooking';
 import { notify } from '@/lib/utils';
 
 interface BookingModalProps {
@@ -34,12 +35,23 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     handlePayment
   } = useBookingForm();
 
+  const { bookings, isLoading: loading, error } = useFetchBooking();
+
   const handleModalClose = () => {
     setIsOpen(false);
     setSelectedDate(null);
     setSelectedTimeSlots([]);
     setBookingSteps(1);
   };
+
+  console.log(
+    'bookings',
+    bookings,
+    'loading',
+    loading,
+    'error',
+    error
+  )
 
   const handleBookingSubmit = async () => {
     const success = await handleSubmit();
@@ -76,6 +88,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
               setSelectedDate={setSelectedDate}
               selectedTimeSlots={selectedTimeSlots}
               setSelectedTimeSlots={setSelectedTimeSlots}
+              loading={loading}
+              bookings={bookings}
             />
           ) : (
             <BookingStepTwo

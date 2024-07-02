@@ -55,21 +55,32 @@ function getPeriod(hour: number) {
   return 'night';
 }
 
-export function generateTimeSlotsForDate(date: Date) {
+export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
   const startTime = 7; // Start time in hours (7 AM)
   const endTime = 22; // End time in hours (10 PM)
   const timeSlots = [];
+
+  const formattedDate = date.toISOString().split('T')[0]; // Get the date in YYYY-MM-DD format
+
   for (let hour = startTime; hour < endTime; hour++) {
     const startTimeString = formatTime(hour);
     const endTimeString = formatTime(hour + 1);
     const period = getPeriod(hour);
+
+    // Check if the time slot is already booked
+    const isBooked = bookings.some(
+      (slot: any) =>
+        slot.time === `${startTimeString} - ${endTimeString}` &&
+        new Date(slot.date).toISOString().split('T')[0] === formattedDate
+    );
 
     timeSlots.push({
       id: `time-slot-${date.getTime()}|||${startTimeString}-${endTimeString}|||${period}`,
       time: `${startTimeString} - ${endTimeString}`,
       date: new Date(date).toISOString(),
       period: period,
-      price: 5000
+      price: 5000,
+      isBooked: isBooked,
     });
   }
 

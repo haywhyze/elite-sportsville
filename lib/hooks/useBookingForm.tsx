@@ -105,8 +105,13 @@ export const useBookingForm = () => {
       // Add booking data to Firestore
       const docRef = await addDoc(collection(db, 'bookings'), {
         ...formData,
-        selectedDate,
-        selectedTimeSlots,
+        selectedTimeSlots: selectedTimeSlots.map((slot) => ({
+          id: slot.id,
+          time: slot.time,
+          date: slot.date,
+          period: slot.period,
+          price: slot.price,
+        })),
         paymentMethod,
         paid: false,
         createdAt: new Date().toISOString(),
