@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 interface FormData {
   name: string;
   email: string;
@@ -101,18 +102,36 @@ export const useBookingForm = () => {
     setIsLoading(true);
 
     try {
-      console.log('Booking data:', {
+      // Add booking data to Firestore
+      const docRef = await addDoc(collection(db, 'bookings'), {
         ...formData,
         selectedDate,
         selectedTimeSlots,
         paymentMethod,
+        paid: false,
+        createdAt: new Date().toISOString(),
       });
+      console.log('Document written with ID: ', docRef.id);
       setIsLoading(false);
+      // Reset form data
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        notes: '',
+      });
+      setSelectedDate(null);
+      setSelectedTimeSlots([]);
       return true; // Indicating success
     } catch (error) {
       setIsLoading(false);
       return false; // Indicating failure
     }
+  };
+
+  const handlePayment = async () => {
+    // implemnt paystack payment gateway here
+    // if payment is successful, create a booking document in Firestore
   };
 
   return {
@@ -136,5 +155,6 @@ export const useBookingForm = () => {
     handleInputChange,
     handleBlur,
     handleSubmit,
+    handlePayment,
   };
 };
