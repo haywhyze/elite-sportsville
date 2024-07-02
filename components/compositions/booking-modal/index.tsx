@@ -44,15 +44,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     setBookingSteps(1);
   };
 
-  console.log(
-    'bookings',
-    bookings,
-    'loading',
-    loading,
-    'error',
-    error
-  )
-
   const handleBookingSubmit = async () => {
     const success = await handleSubmit();
     if (success) {

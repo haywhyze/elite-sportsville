@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export const useFetchBooking = () => {
@@ -8,22 +8,24 @@ export const useFetchBooking = () => {
   const [bookings, setBookings] = useState<{ id: string }[]>([]);
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'bookings'));
+    const unsubscribe = onSnapshot(
+      collection(db, 'bookings'),
+      (querySnapshot) => {
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setBookings(data);
         setIsLoading(false);
-      } catch (error) {
+      },
+      (error) => {
         setError(error);
         setIsLoading(false);
       }
-    };
+    );
 
-    fetchBookings();
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, []);
 
   return { isLoading, error, bookings };
