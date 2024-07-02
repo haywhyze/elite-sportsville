@@ -12,8 +12,10 @@ export default function BookingActions({
   setBookingSteps,
   paymentMethod,
   handleSubmit,
+  handlePayment,
   isLoading,
   errors,
+  formData,
 }: {
   bookingSteps: number;
   setIsOpen: (value: boolean) => void;
@@ -23,8 +25,10 @@ export default function BookingActions({
   setBookingSteps: (value: number) => void;
   paymentMethod: string;
   handleSubmit: () => void;
+  handlePayment: () => void;
   isLoading: boolean;
   errors: any;
+  formData: any;
 }) {
   return (
     <DialogActions>
@@ -60,14 +64,15 @@ export default function BookingActions({
               if (paymentMethod === 'manual') {
                 handleSubmit();
               } else {
-                // setBookingSteps(3);
+                handlePayment();
               }
             }}
             color='purple'
             disabled={
               paymentMethod === '' ||
               isLoading ||
-              Object.values(errors).some((error) => error !== '')
+              Object.values(errors).some((error) => error !== '') ||
+              formData.name === ''
             }
           >
             {paymentMethod === 'manual' ? 'Reserve Booking' : 'Confirm Booking'}
