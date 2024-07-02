@@ -1,11 +1,11 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 import { Dialog, DialogTitle } from '@/components/dialog';
 import { X } from 'lucide-react';
 import BookingStepOne from './step-one';
 import BookingStepTwo from './step-two';
 import BookingActions from './booking-actions';
 import { useBookingForm } from '@/lib/hooks/useBookingForm'; // Import the custom hook
+import { notify } from '@/lib/utils';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -31,6 +31,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
     handleInputChange,
     handleBlur,
     handleSubmit,
+    handlePayment
   } = useBookingForm();
 
   const handleModalClose = () => {
@@ -43,17 +44,16 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
   const handleBookingSubmit = async () => {
     const success = await handleSubmit();
     if (success) {
-      toast.success('Booking successful', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
+      notify({
+        type: 'success',
+        message: 'Booking reserved successful!',
       });
       handleModalClose();
     } else {
-      toast.error('An error occurred. Please try again.');
+      notify({
+        type: 'error',
+        message: 'Booking failed!',
+      });
     }
   };
 
@@ -100,10 +100,12 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
             setBookingSteps={setBookingSteps}
             paymentMethod={paymentMethod}
             handleSubmit={handleBookingSubmit}
+            handlePayment={handlePayment}
             isLoading={isLoading}
             errors={errors}
             selectedTimeSlots={selectedTimeSlots}
             setSelectedTimeSlots={setSelectedTimeSlots}
+            formData={formData}
           />
         </Dialog>
       )}
