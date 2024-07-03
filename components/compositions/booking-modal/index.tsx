@@ -14,50 +14,38 @@ interface BookingModalProps {
 }
 
 const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
-  const {
-    selectedDate,
-    setSelectedDate,
-    selectedTimeSlots,
-    setSelectedTimeSlots,
-    bookingSteps,
-    setBookingSteps,
-    paymentMethod,
-    setPaymentMethod,
-    formData,
-    errors,
-    isLoading,
-    nameRef,
-    emailRef,
-    phoneRef,
-    handleInputChange,
-    handleBlur,
-    handleSubmit,
-    handlePayment
-  } = useBookingForm();
+    const handleModalClose = () => {
+      setIsOpen(false);
+      setSelectedDate(null);
+      setSelectedTimeSlots([]);
+      setBookingSteps(1);
+    };
+    const {
+      selectedDate,
+      setSelectedDate,
+      selectedTimeSlots,
+      setSelectedTimeSlots,
+      bookingSteps,
+      setBookingSteps,
+      paymentMethod,
+      setPaymentMethod,
+      formData,
+      errors,
+      isLoading,
+      nameRef,
+      emailRef,
+      phoneRef,
+      handleInputChange,
+      handleBlur,
+      handleSubmit,
+    } = useBookingForm({ handleModalClose });
 
-  const { bookings, isLoading: loading, error } = useFetchBooking();
+    const { bookings, isLoading: loading, error } = useFetchBooking();
 
-  const handleModalClose = () => {
-    setIsOpen(false);
-    setSelectedDate(null);
-    setSelectedTimeSlots([]);
-    setBookingSteps(1);
-  };
+
 
   const handleBookingSubmit = async () => {
-    const success = await handleSubmit();
-    if (success) {
-      notify({
-        type: 'success',
-        message: 'Booking reserved successful!',
-      });
-      handleModalClose();
-    } else {
-      notify({
-        type: 'error',
-        message: 'Booking failed!',
-      });
-    }
+    await handleSubmit();
   };
 
   return (
@@ -105,7 +93,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
             setBookingSteps={setBookingSteps}
             paymentMethod={paymentMethod}
             handleSubmit={handleBookingSubmit}
-            handlePayment={handlePayment}
             isLoading={isLoading}
             errors={errors}
             selectedTimeSlots={selectedTimeSlots}
