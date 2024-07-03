@@ -6,7 +6,7 @@ import BookingStepTwo from './step-two';
 import BookingActions from './booking-actions';
 import { useBookingForm } from '@/lib/hooks/useBookingForm'; // Import the custom hook
 import { useFetchBooking } from '@/lib/hooks/useFetchBooking';
-import { notify } from '@/lib/utils';
+import useFetchPricing from '@/lib/hooks/useFetchPricing';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -14,35 +14,35 @@ interface BookingModalProps {
 }
 
 const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
-    const handleModalClose = () => {
-      setIsOpen(false);
-      setSelectedDate(null);
-      setSelectedTimeSlots([]);
-      setBookingSteps(1);
-    };
-    const {
-      selectedDate,
-      setSelectedDate,
-      selectedTimeSlots,
-      setSelectedTimeSlots,
-      bookingSteps,
-      setBookingSteps,
-      paymentMethod,
-      setPaymentMethod,
-      formData,
-      errors,
-      isLoading,
-      nameRef,
-      emailRef,
-      phoneRef,
-      handleInputChange,
-      handleBlur,
-      handleSubmit,
-    } = useBookingForm({ handleModalClose });
+  const handleModalClose = () => {
+    setIsOpen(false);
+    setSelectedDate(null);
+    setSelectedTimeSlots([]);
+    setBookingSteps(1);
+  };
+  const {
+    selectedDate,
+    setSelectedDate,
+    selectedTimeSlots,
+    setSelectedTimeSlots,
+    bookingSteps,
+    setBookingSteps,
+    paymentMethod,
+    setPaymentMethod,
+    formData,
+    errors,
+    isLoading,
+    nameRef,
+    emailRef,
+    phoneRef,
+    handleInputChange,
+    handleBlur,
+    handleSubmit,
+  } = useBookingForm({ handleModalClose });
 
-    const { bookings, isLoading: loading, error } = useFetchBooking();
+  const { bookings, isLoading: loading } = useFetchBooking();
 
-
+  const { pricing, isLoading: loadingPrice } = useFetchPricing();
 
   const handleBookingSubmit = async () => {
     await handleSubmit();
@@ -67,8 +67,9 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
               setSelectedDate={setSelectedDate}
               selectedTimeSlots={selectedTimeSlots}
               setSelectedTimeSlots={setSelectedTimeSlots}
-              loading={loading}
+              loading={loading || loadingPrice}
               bookings={bookings}
+              pricing={pricing}
             />
           ) : (
             <BookingStepTwo

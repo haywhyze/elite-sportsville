@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { notify } from '../utils';
 
 export const useFetchBooking = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +39,7 @@ export const useFetchBooking = () => {
       (error) => {
         setError(error);
         setIsLoading(false);
+        notify({ message: 'Failed to fetch bookings', type: 'error' });
       }
     );
 

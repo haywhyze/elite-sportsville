@@ -56,7 +56,12 @@ function getPeriod(hour: number) {
   return 'night';
 }
 
-export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
+export function generateTimeSlotsForDate(date: Date, bookings: any = [], pricing: any = {
+  morning: 8000,
+  afternoon: 5000,
+  evening: 10000,
+  night: 15000
+}) {
   const startTime = 7; // Start time in hours (7 AM)
   const endTime = 22; // End time in hours (10 PM)
   const timeSlots = [];
@@ -86,8 +91,8 @@ export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
       id: `time-slot-${date.getTime()}|||${startTimeString}-${endTimeString}|||${period}`,
       time: `${startTimeString} - ${endTimeString}`,
       date: new Date(date).toISOString(),
-      period: period,
-      price: 5000,
+      period,
+      price: Number(pricing[period]),
       isBooked: isBooked,
       isUnavailable: isUnavailable
     });

@@ -163,7 +163,10 @@ import { useState, useRef } from 'react';
       email: formData.email,
       amount:
         selectedTimeSlots.reduce((acc, slot) => acc + slot.price!, 0) * 100,
-      reference: `${uuidv4()}-${new Date().getTime()}-${formData.phone}`,
+      reference: `${uuidv4()}-${new Date().getTime()}-${formData.phone.replace(
+        /\D/g,
+        ''
+      )}`,
       metadata: {
         custom_fields: [
           {
@@ -188,12 +191,6 @@ import { useState, useRef } from 'react';
     };
 
     const onSuccess = async (response: any) => {
-      console.log(
-        'Payment successful. Reference: ',
-        response.reference,
-        'Transaction: ',
-        response
-      );
       // Save booking data to Firestore
       const success = await saveBookingData(true, response);
       if (success) {

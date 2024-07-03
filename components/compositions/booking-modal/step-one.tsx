@@ -14,6 +14,7 @@ export default function BookingStepOne({
   setSelectedTimeSlots,
   loading,
   bookings,
+  pricing
 }: {
   selectedDate: Date | null;
   setSelectedDate: (date: Date | null) => void;
@@ -21,6 +22,7 @@ export default function BookingStepOne({
   setSelectedTimeSlots: (time: any) => void;
   bookings: any;
   loading: boolean;
+  pricing: any;
 }) {
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0]);
   const handleDateChange = (date: Date | null) => setSelectedDate(date);
@@ -47,7 +49,8 @@ export default function BookingStepOne({
   };
   const timeSlots = generateTimeSlotsForDate(
     selectedDate || new Date(),
-    bookings.flatMap((booking: any) => booking.selectedTimeSlots)
+    bookings.flatMap((booking: any) => booking.selectedTimeSlots),
+    pricing
   );
 
   const timeSlotsIntoPeriods = timeSlots.reduce((acc, slot) => {
