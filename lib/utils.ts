@@ -1,3 +1,4 @@
+import { formatDate } from 'date-fns';
 import ms from 'ms'
 import { toast } from 'react-toastify';
 
@@ -60,7 +61,7 @@ export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
   const endTime = 22; // End time in hours (10 PM)
   const timeSlots = [];
 
-  const formattedDate = date.toISOString().split('T')[0]; // Get the date in YYYY-MM-DD format
+  const formattedDate = formatDate(date, 'yyyy-MM-dd'); // Get the date in YYYY-MM-DD format
 
   for (let hour = startTime; hour < endTime; hour++) {
     const startTimeString = formatTime(hour);
@@ -71,15 +72,15 @@ export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
     const isBooked = bookings.some(
       (slot: any) =>
         slot.time === `${startTimeString} - ${endTimeString}` &&
-        new Date(slot.date).toISOString().split('T')[0] === formattedDate
+        formatDate(new Date(slot.date), 'yyyy-MM-dd') === formattedDate
     );
 
     // Check if time slot is in the past and add unavailable flag
     const now = new Date();
     const currentTime = now.getHours();
-    const currentDate = now.toISOString().split('T')[0];
-    const isPast = date.toISOString().split('T')[0] < currentDate;
-    const isUnavailable = isPast || (date.toISOString().split('T')[0] === currentDate && hour < currentTime);
+    const currentDate = formatDate(now, 'yyyy-MM-dd');
+    const isPast = formattedDate < currentDate;
+    const isUnavailable = isPast || (formattedDate === currentDate && hour <= currentTime);
 
     timeSlots.push({
       id: `time-slot-${date.getTime()}|||${startTimeString}-${endTimeString}|||${period}`,
