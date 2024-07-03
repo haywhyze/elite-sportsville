@@ -6,18 +6,21 @@ const TimeSlot = ({
   isBooked,
   onSelect,
   selected,
+  isUnavailable,
 }: {
   time: string;
   price: number;
   isBooked: boolean;
   onSelect: () => void;
   selected: boolean;
+  isUnavailable: boolean;
 }) => {
   return (
     <button
       className={classNames(
         'px-1 py-2 text-xs lg:text-sm border rounded-md shadow-sm w-24',
         {
+          'bg-gray-200 text-gray-600': isUnavailable,
           'outline outline-2 outline-offset-1 outline-dark-green bg-green-200 text-dark-purple':
             selected,
           'text-dark-purple bg-green-50': !selected && !isBooked,
@@ -31,7 +34,9 @@ const TimeSlot = ({
       type='button'
     >
       {time} <br />
-      {isBooked ? (
+      {isUnavailable ? (
+        <span className='block text-xs'>Unavailable</span>
+      ) : isBooked ? (
         <span className='block text-xs'>Booked</span>
       ) : (
         <span className='block text-xs'>₦{price.toLocaleString()}</span>

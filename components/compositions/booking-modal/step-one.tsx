@@ -97,6 +97,7 @@ export default function BookingStepOne({
                       selected={selectedTimeSlots
                         .map((t: { id: string | number | undefined }) => t.id)
                         .includes(time.id)}
+                      isUnavailable={time.isUnavailable}
                     />
                   ))}
                 </div>

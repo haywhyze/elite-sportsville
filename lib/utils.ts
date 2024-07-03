@@ -74,6 +74,13 @@ export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
         new Date(slot.date).toISOString().split('T')[0] === formattedDate
     );
 
+    // Check if time slot is in the past and add unavailable flag
+    const now = new Date();
+    const currentTime = now.getHours();
+    const currentDate = now.toISOString().split('T')[0];
+    const isPast = date.toISOString().split('T')[0] < currentDate;
+    const isUnavailable = isPast || (date.toISOString().split('T')[0] === currentDate && hour < currentTime);
+
     timeSlots.push({
       id: `time-slot-${date.getTime()}|||${startTimeString}-${endTimeString}|||${period}`,
       time: `${startTimeString} - ${endTimeString}`,
@@ -81,6 +88,7 @@ export function generateTimeSlotsForDate(date: Date, bookings: any = []) {
       period: period,
       price: 5000,
       isBooked: isBooked,
+      isUnavailable: isUnavailable
     });
   }
 
