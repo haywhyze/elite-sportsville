@@ -12,7 +12,6 @@ export default function BookingActions({
   setBookingSteps,
   paymentMethod,
   handleSubmit,
-  handlePayment,
   isLoading,
   errors,
   formData,
@@ -25,7 +24,6 @@ export default function BookingActions({
   setBookingSteps: (value: number) => void;
   paymentMethod: string;
   handleSubmit: () => void;
-  handlePayment: () => void;
   isLoading: boolean;
   errors: any;
   formData: any;
@@ -61,11 +59,7 @@ export default function BookingActions({
           </Button>
           <Button
             onClick={() => {
-              if (paymentMethod === 'manual') {
-                handleSubmit();
-              } else {
-                handlePayment();
-              }
+              handleSubmit();
             }}
             color='purple'
             disabled={
