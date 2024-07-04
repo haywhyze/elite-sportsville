@@ -7,7 +7,7 @@ export default function Hero({
   setBookingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <div className='relative isolate bg-gray-900'>
+    <div id='hero' className='relative isolate bg-gray-900'>
       <div
         className='absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-10'
         aria-hidden='true'
@@ -63,7 +63,7 @@ export default function Hero({
               alt='Description of the image'
               fill
               priority
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes='(min-width: 1024px) 50vw, 100vw'
             />
           </div>
         </div>

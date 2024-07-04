@@ -47,7 +47,11 @@ const tiers = [
   },
 ];
 
-export default function Pricing() {
+export default function Pricing({
+  setBookingModalOpen,
+}: {
+  setBookingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className='isolate overflow-hidden bg-gray-900'>
       <div className='mx-auto max-w-7xl px-6 pb-96 pt-24 text-center sm:pt-32 lg:px-8'>
@@ -127,13 +131,14 @@ export default function Pricing() {
                       ))}
                     </ul>
                   </div>
-                  <a
-                    href={tier.href}
+                  <button
+                    type='button'
+                    onClick={() => setBookingModalOpen(true)}
                     aria-describedby={tier.id}
                     className='mt-8 block rounded-md bg-bright-purple-dark px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-bright-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple-dark'
                   >
                     Get started today
-                  </a>
+                  </button>
                 </div>
               ))}
               <div className='bg-white flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center'>
@@ -146,13 +151,14 @@ export default function Pricing() {
                     booking times. Perfect for those who prefer non-peak hours.
                   </p>
                 </div>
-                <a
-                  href='#'
+                <button
+                  type='button'
+                  onClick={() => setBookingModalOpen(true)}
                   className='rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-bright-purple-dark ring-1 ring-inset ring-bright-purple-dark hover:ring-bright-purple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple-dark'
                 >
                   Book Discounted Time Slot
                   <span aria-hidden='true'>&rarr;</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>
