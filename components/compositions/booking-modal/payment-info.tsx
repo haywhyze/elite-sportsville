@@ -33,7 +33,10 @@ export default function PaymentInfo() {
             Once confirmed, you will receive a booking confirmation. Thank you
             for choosing Elite Sportsville!
             <br />
-            For questions, contact us on WhatsApp.
+            For questions, contact us on
+            <a href='https://wa.me/2349034181221'>
+              <strong>WhatsApp</strong>
+            </a>
           </p>
         </div>
       </div>
