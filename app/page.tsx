@@ -43,8 +43,8 @@ export default function Home() {
         id='bookNowButton'
         onClick={() => setBookingModalOpen(true)}
         className={`${
-          isFixed
-            ? 'fixed bottom-20 right-5 scale-1'
+          isFixed && !bookingModalOpen
+            ? 'fixed bottom-5 right-5 scale-1'
             : 'absolute top-1/2 right-10 transform -translate-y-1/2 scale-0'
         } rounded-md bg-bright-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-bright-purple-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bright-purple transition-all duration-300 z-50`}
       >
