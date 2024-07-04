@@ -18,11 +18,11 @@ export default function PaymentInfo() {
           <p className='text-sm text-green-100 mt-1'>
             1. Transfer to:
             <br />
-            <span className='pl-4'>Account Name: Elite Sportsville</span>
+            <span className='pl-4'>Account Name: Yusuf Ayo Abdulkarim</span>
             <br />
-            <span className='pl-4'>Account Number: 1234567890</span>
+            <span className='pl-4'>Account Number: 8031961496</span>
             <br />
-            <span className='pl-4'>Bank: Example Bank</span>
+            <span className='pl-4'>Bank: Opay</span>
             <br />
             2. Share receipt on WhatsApp:{' '}
             <a href='https://wa.me/2349034181221'>
