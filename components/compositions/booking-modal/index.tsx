@@ -55,7 +55,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, setIsOpen }) => {
           size='4xl'
           open={isOpen}
           onClose={setIsOpen}
-          className='dark:bg-gray-900 dark:text-white'
+          className='bg-gray-900 text-white'
         >
           <div className='absolute top-0 right-0 p-4'>
             <X onClick={handleModalClose} className='text-lg cursor-pointer' />
