@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import Carousel from '../carousel';
 
 export default function Hero({
   setBookingModalOpen,
@@ -57,14 +58,7 @@ export default function Hero({
         </div>
         <div className='relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0'>
           <div className='relative w-full h-0 pb-[66.67%] lg:absolute lg:inset-0 lg:h-full lg:pb-0'>
-            <Image
-              className='object-cover'
-              src='/hero.jpg' // Update the path to your image
-              alt='Description of the image'
-              fill
-              priority
-              sizes='(min-width: 1024px) 50vw, 100vw'
-            />
+            <Carousel />
           </div>
         </div>
       </div>

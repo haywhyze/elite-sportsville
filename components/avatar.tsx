@@ -37,7 +37,7 @@ export function Avatar({
         <svg
           className="size-full select-none fill-current p-[5%] text-[48px] font-medium uppercase"
           viewBox="0 0 100 100"
-          aria-hidden={alt ? undefined : 'true'}
+          // aria-hidden={alt ? '' : 'true'}
         >
           {alt && <title>{alt}</title>}
           <text x="50%" y="50%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle" dy=".125em">
