@@ -40,6 +40,7 @@ export default function Home() {
     <main className='relative flex min-h-screen flex-col'>
       {/* <Header /> */}
       <button
+        type='button'
         id='bookNowButton'
         onClick={() => setBookingModalOpen(true)}
         className={`${
